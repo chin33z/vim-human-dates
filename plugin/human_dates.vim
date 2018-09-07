@@ -17,12 +17,12 @@ let g:loaded_human_dates = 1
 " Print the human readable form of a long epoch date
 function! s:dateFromLongEpoch()
    " Let the shell divide because Vim only supports 32 bit integers
-   let sdate = system("echo $((". expand("<cword>") ."/1000))")
+   let sdate = system("echo $((". expand("<cword>") ."/1000000000))")
 
    " Format the date
    let human = tolower(substitute(strftime("%m/%d/%y %I:%M:%S%p", sdate), "\\\(^\\\|\\\s\\\)0", "\\1", "g"))
 
-   echo human ." (". system("LC_ALL=en_US.utf8 printf \"%'d\" ". (sdate - localtime())) ." seconds from now)"
+   echo human ." (". system("LC_ALL=zh_TW.utf8 printf \"%'d\" ". (sdate - localtime())) ." seconds from now)"
 endfunc
 
 command DateFromLongEpoch :call <SID>dateFromLongEpoch()
